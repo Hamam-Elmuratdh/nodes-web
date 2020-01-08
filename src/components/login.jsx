@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input'
+
+import { Redirect } from 'react-router';
+
 
 export function Login(props) {
     const [username, setUsername] = useState("");
@@ -13,19 +15,29 @@ export function Login(props) {
             password
         };
 
-        fetch("/login", {
+        fetch("https://nodes-chat-app.herokuapp.com/signin", {
             method: "POST",
+
             headers: {
                 "Content-Type": "application/json;charset=utf-8"
             },
             body: JSON.stringify(user)
-        }).then(() => {
-            setPassword('')
-            setUsername('')
-        })
-    }
-    return (
+        }).then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+                localStorage.setItem("username", username)
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("refreshToken", data.refreshToken);
 
+                setPassword('')
+                setUsername('')
+                Redirect("/home")
+                // <Redirect to='/home' />
+            })
+    }
+
+
+    return (
         <form className="signin-form"
             onSubmit={handleSubmit}>
             <label > username </label>
