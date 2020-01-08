@@ -7,7 +7,7 @@ import { Redirect } from 'react-router';
 export function Login(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
+    const [isLogged, setIslogged] = useState(false)
     var handleSubmit = e => {
         e.preventDefault();
         let user = {
@@ -31,36 +31,39 @@ export function Login(props) {
 
                 setPassword('')
                 setUsername('')
-                Redirect("/home")
+
+                // Redirect("/home")
                 // <Redirect to='/home' />
             })
     }
+
+    return (
+
 
 
     return (
         <form className="signin-form"
             onSubmit={handleSubmit}>
             <label > username </label>
-            <input
+            <Input
                 placeholder="Enter user name"
                 type="text"
                 value={username}
                 onChange={e => {
                     setUsername(e.target.value);
                 }}
-            ></input>
+            ></Input>
             <label > password </label>
-            <input
+            <Input
                 placeholder="enter password"
                 type="password"
                 value={password}
                 onChange={e => {
                     setPassword(e.target.value);
                 }}
-            ></input>
+            ></Input>
             <br />
             <Button type="submit" variant="contained" color="primary" >SUBMIT</Button>
         </form>
     )
 }
-export default Login

@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input'
+
+
 export function SignUp(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setconfirmPassword] = useState("");
     const [correctPass, setcorrectPass] = useState();
-    var handleSubmit = () => {
+
+
+    var handleSubmit = e => {
+        e.preventDefault();
 
         passwordChecker()
         if (!correctPass) {
             //change to set the class of the form to red  an
             return;
-
         }
         let user = {
             username,
@@ -34,6 +38,8 @@ export function SignUp(props) {
 
                 setPassword('')
                 setUsername('')
+
+                setconfirmPassword('')
             })
 
     };
@@ -82,4 +88,3 @@ export function SignUp(props) {
         </div>
     )
 }
-export default SignUp
