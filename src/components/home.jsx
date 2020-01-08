@@ -3,13 +3,14 @@ import React, { useState } from 'react'
 import { Chat } from './chat.jsx'
 import Axios from 'axios';
 // import Input from '@material-ui/core/Input'
-
 export function Home(props) {
+
     const [loggedIn, setLoggedIn] = useState(true)
 
     if (!loggedIn) {
         return <Redirect to='/login' />
     }
+
 
     // setInterval(function () {
     let headers = {
@@ -50,9 +51,12 @@ export function Home(props) {
 
 
 
+
     return (
         <div >
+
             <Chat />
+
         </div>
     )
 

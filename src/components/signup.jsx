@@ -9,8 +9,10 @@ export function SignUp(props) {
     const [confirmPassword, setconfirmPassword] = useState("");
     const [correctPass, setcorrectPass] = useState();
 
+
     var handleSubmit = e => {
         e.preventDefault();
+
         passwordChecker()
         if (!correctPass) {
             //change to set the class of the form to red  an
@@ -36,8 +38,10 @@ export function SignUp(props) {
 
                 setPassword('')
                 setUsername('')
+
                 setconfirmPassword('')
             })
+
     };
     var passwordChecker = () => {
         password === confirmPassword ? setcorrectPass(true) : setcorrectPass(false);
@@ -46,7 +50,10 @@ export function SignUp(props) {
     return (
         <div className="signup-container">
             <form className="signup-form"
-                onSubmit={handleSubmit}>
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSubmit()
+                }}>
                 <label > username </label>
                 <Input
                     placeholder="Enter user name"
