@@ -6,8 +6,8 @@ export function SignUp(props) {
     const [password, setPassword] = useState("");
     const [confirmPassword, setconfirmPassword] = useState("");
     const [correctPass, setcorrectPass] = useState();
-    var handleSubmit = e => {
-        e.preventDefault();
+    var handleSubmit = () => {
+
         passwordChecker()
         if (!correctPass) {
             //change to set the class of the form to red  an
@@ -19,13 +19,23 @@ export function SignUp(props) {
             password
         };
 
-        fetch("/signup", {
+        fetch("https://nodes-chat-app.herokuapp.com/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8"
             },
             body: JSON.stringify(user)
-        });
+        }).then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+                localStorage.setItem("username", username)
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("refreshToken", data.refreshToken);
+
+                setPassword('')
+                setUsername('')
+            })
+
     };
     var passwordChecker = () => {
         password === confirmPassword ? setcorrectPass(true) : setcorrectPass(false);
@@ -34,7 +44,10 @@ export function SignUp(props) {
     return (
         <div className="signup-container">
             <form className="signup-form"
-                onSubmit={handleSubmit}>
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSubmit()
+                }}>
                 <label > username </label>
                 <Input
                     placeholder="Enter user name"
