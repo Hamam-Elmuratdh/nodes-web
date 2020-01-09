@@ -15,7 +15,7 @@ export function Home(props) {
     // setInterval(function () {
     let headers = {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem("token")}`
+        'authorization': `bearer ${localStorage.getItem("token")}`
     }
 
     Axios.post('https://nodes-chat-app.herokuapp.com/auth', {}, {

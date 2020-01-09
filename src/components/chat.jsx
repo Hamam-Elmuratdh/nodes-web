@@ -3,12 +3,12 @@ import io from 'socket.io-client';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 
-
+import MessageList from './messages/MessagesList.jsx'
 //set room name id here !!!
 
 var socketed = io('http://localhost:5001', {
-    Headers: {
-        authorization: `bearer ${localStorage.getItem("token")}`
+    query: {
+        'authorization': `bearer ${localStorage.getItem("token")}`
     }
 })
 
@@ -34,11 +34,9 @@ export function Chat(props) {
 
     return (
         < div >
-            THIS is the CHAT SECTION
-            < br />
-            <br />
-            <br />
-            <div className="message-container">
+
+            <div className="send-message-form">
+                <MessageList />
                 <form
                     onSubmit={handleSubmit}
                     style={{ padding: "300px" }}>
@@ -53,6 +51,7 @@ export function Chat(props) {
                     >Send</Button>
                 </form>
             </div>
+
         </div >
     )
 }
