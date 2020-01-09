@@ -6,7 +6,7 @@ import Input from '@material-ui/core/Input';
 import MessageList from './messages/MessagesList.jsx'
 //set room name id here !!!
 
-var socketed = io('http://localhost:5001', {
+var socketed = io('http://192.168.137.82:5001/room1', {
     query: {
         'authorization': `bearer ${localStorage.getItem("token")}`
     }
